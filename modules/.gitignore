@@ -1,0 +1,4 @@
+modules/venv/
+modules/.idea/
+.idea/
+.venv/
