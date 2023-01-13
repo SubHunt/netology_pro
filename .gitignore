@@ -1,0 +1,7 @@
+modules/venv/
+modules/.idea/
+modules/application/
+modules/.idea/
+modules/.venv/
+regular/old.py
+regular/.venv/
