@@ -5,3 +5,4 @@ modules/.idea/
 modules/.venv/
 regular/old.py
 regular/.venv/
+web_scraping/.venv/
