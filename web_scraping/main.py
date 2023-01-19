@@ -18,9 +18,20 @@ def main():
         странице вакансии, но это увеличивает время запроса значительно, потому что нужно "проваливаться" по каждой ссылке.
     """
     hh_main_html = requests.get(url=HOST, headers=get_headers()).text
+    # В теории должно было помочь с unicode
+    # hh_main_html = requests.get(HOST, headers=get_headers())
+    # hh_main_html.encoding = response.apparent_encoding
+    # hh_main_html = response.text
     if requests.codes.ok == 200:
-        soup = BeautifulSoup(hh_main_html, features='lxml')
+        soup = BeautifulSoup(hh_main_html, features='lxml', from_encoding='utf-8')
         # Забираем список вакансий...hh.ru через bs4 отдает первые 20 вакансий
+        """У методов find и find_all есть атрибуты:
+        1. class_ - поиск по классу тега
+        2. id - поиск по id тега
+        3. attrs - поиск по всем элементам тега.
+        Поиск по всем элементам осуществляется с помощью словаря, в который можно перечислить наименования атрибутов тегов, 
+        как ключи, а значения - как значения:`soup.find('span', attrs={"data-qa": "vacancy-serp__vacancy-compensation"})
+        """
         vacancy_list_tag = soup.find('div', id='a11y-main-content')
         vacancy_tag = vacancy_list_tag.find_all(class_='serp-item')
         vacancies = []
@@ -49,6 +60,7 @@ def main():
                     'city': city,
                     'description': description_body
                 })
+        pprint(vacancies)
         return vacancies
     else:
         print('Ошибка подключения к сайту {HOST}')
