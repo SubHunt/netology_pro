@@ -8,3 +8,5 @@ regular/.venv/
 web_scraping/.venv/
 iterators_generators/.venv_it/
 decorators/.decvenv/
+tests/config.py
+tests/.vest
